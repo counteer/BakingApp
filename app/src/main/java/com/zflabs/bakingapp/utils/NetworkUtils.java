@@ -16,11 +16,11 @@ public final class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String BASE_URL =
-            "https://api.themoviedb.org/3/";
+            "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     public static URL buildUrl() {
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                .appendPath(BASE_URL)
+
                 .build();
 
         URL url = convertUriToURL(builtUri);

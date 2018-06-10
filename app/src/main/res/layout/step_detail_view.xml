@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <com.google.android.exoplayer2.ui.PlayerView
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:layout_width="match_parent"
         android:id="@+id/video_view"/>
 
@@ -14,8 +14,12 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:id="@+id/step_detail_description" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:id="@+id/next_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/next_button"
+        android:text="@string/next_step"
+        android:layout_gravity="center_horizontal|bottom"
+        android:onClick="nextStep"/>
 </LinearLayout>

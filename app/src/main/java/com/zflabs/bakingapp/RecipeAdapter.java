@@ -31,6 +31,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         @BindView(R.id.tv_recipe_name)
         TextView recipeName;
 
+        @BindView(R.id.tv_servings)
+        TextView servings;
+
         public RecipeAdapterViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

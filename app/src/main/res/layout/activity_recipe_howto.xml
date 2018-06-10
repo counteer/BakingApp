@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <fragment android:name="com.zflabs.bakingapp.StepsFragment"
+    <FrameLayout
         android:id="@+id/steps_fragment"
         android:layout_weight="1"
         android:layout_width="0dp"

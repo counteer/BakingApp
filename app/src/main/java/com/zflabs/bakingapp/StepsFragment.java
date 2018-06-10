@@ -4,36 +4,46 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.zflabs.bakingapp.data.Ingredients;
 import com.zflabs.bakingapp.data.Recipe;
 import com.zflabs.bakingapp.data.Steps;
 import com.zflabs.bakingapp.utils.JsonUtils;
 
-import org.json.JSONObject;
+import java.util.Arrays;
 
 
 public class StepsFragment extends Fragment implements StepAdapter.StepAdapterClickHandler{
 
-    Steps[] steps;
-
     private OnStepClickListener clickListener;
+    private Recipe recipe;
 
     @Override
-    public void onClick(Steps steps) {
-        Bundle bundle =  new Bundle();
-        JSONObject stepJson = steps.toJSON();
-        bundle.putString("step", stepJson.toString());
-        Intent intent = new Intent(getContext(), StepDetailActivity.class);
-        intent.putExtra(Intent.EXTRA_TEXT, stepJson.toString());
-        startActivity(intent);
+    public void onClick(int adapterPosition) {
+        Steps[] steps = this.recipe.getSteps();
+        if(RecipeHowtoActivity.twoPane){
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("step", steps[adapterPosition].toJSON().toString());
+            StepDetailFragment stepDetailFragment = new StepDetailFragment();
+
+            stepDetailFragment.setArguments(bundle2);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.step_detail_fragment, stepDetailFragment).commit();
+        } else {
+            Bundle bundle = new Bundle();
+            Steps[] stepsToSend = Arrays.copyOfRange(steps, adapterPosition, steps.length);
+            bundle.putString(Intent.EXTRA_TEXT, JsonUtils.getJsonFromSteps(stepsToSend).toString());
+            Intent intent = new Intent(getContext(), StepDetailActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 
     public interface OnStepClickListener {
@@ -55,7 +65,7 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
         super.setArguments(args);
         String steps = args.getString("recipe");
         Recipe recipe = JsonUtils.getRecipeFromJsonString(steps);
-        this.steps = recipe.getSteps();
+        this.recipe = recipe;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,18 +74,12 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
         View rootView = inflater.inflate(R.layout.steps_view, container, false);
         TextView ingredients  = (TextView) rootView.findViewById(R.id.tv_ingredients);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_steps);
+        ingredients.setText(this.recipe.getIngredintsString());
         StepAdapter adapter = new StepAdapter(this);
-        adapter.setSteps(steps);
+        adapter.setSteps(this.recipe.getSteps());
 
         rv.setLayoutManager(new GridLayoutManager(rootView.getContext(), 1));
         rv.setAdapter(adapter);
-//        View.OnClickListener listener = new View.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                clickListener.onStepSelected(0);
-//            }
-//        };
-//        rv.setOnClickListener(listener);
         return rootView;
     }
 

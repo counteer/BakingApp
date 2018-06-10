@@ -3,6 +3,7 @@ package com.zflabs.bakingapp.utils;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.zflabs.bakingapp.data.Ingredients;
 import com.zflabs.bakingapp.data.Recipe;
 import com.zflabs.bakingapp.data.Steps;
 
@@ -36,9 +37,12 @@ public class JsonUtils {
     private static Recipe getRecipeFromString(JSONObject actualRecipeJson) throws JSONException {
         Recipe actualRecipe = new Recipe();
         actualRecipe.setId(actualRecipeJson.getInt("id"));
+        actualRecipe.setServings(actualRecipeJson.getInt("servings"));
         actualRecipe.setName(actualRecipeJson.getString("name"));
         Steps[] steps = getSteps(actualRecipeJson);
         actualRecipe.setSteps(steps);
+        Ingredients[] ingredients = getIngredients(actualRecipeJson);
+        actualRecipe.setIngredients(ingredients);
         return actualRecipe;
     }
 
@@ -53,6 +57,28 @@ public class JsonUtils {
         return steps;
     }
 
+    public static JSONArray getJsonFromSteps(Steps[] steps){
+        JSONArray result =  new JSONArray();
+        for(Steps step : steps){
+            JSONObject jsonObject = step.toJSON();
+            result.put(jsonObject);
+        }
+        return result;
+    }
+
+    public static Steps[] getStepsFromString(String steps){
+        try {
+            JSONArray input = new JSONArray(steps);
+            JSONObject a  = new JSONObject();
+            a.put("steps", input);
+            Steps[] result = getSteps(a);
+            return result;
+        } catch (JSONException e) {
+            Log.e("JsonUtils", e.getMessage());
+        }
+        return null;
+    }
+
     private static Steps[] getSteps(JSONObject actualRecipeJson) throws JSONException {
         JSONArray steps = actualRecipeJson.getJSONArray("steps");
         Steps[] result = new Steps[steps.length()];
@@ -60,6 +86,20 @@ public class JsonUtils {
             JSONObject jsonObject = steps.getJSONObject(i);
             Steps actualSteps = getStep(jsonObject);
             result[i] = actualSteps;
+        }
+        return result;
+    }
+
+    private static Ingredients[] getIngredients(JSONObject actualRecipeJson) throws JSONException {
+        JSONArray ingredients = actualRecipeJson.getJSONArray("ingredients");
+        Ingredients[] result = new Ingredients[ingredients.length()];
+        for(int i = 0; i < ingredients.length();++i){
+            JSONObject jsonObject = ingredients.getJSONObject(i);
+            Ingredients actualIingredients = new Ingredients();
+            actualIingredients.setIngredient(jsonObject.optString("ingredient", ""));
+            actualIingredients.setQuantity(jsonObject.optString("quantity", ""));
+            actualIingredients.setMeasure(jsonObject.optString("measure", ""));
+            result[i] = actualIingredients;
         }
         return result;
     }
@@ -74,4 +114,6 @@ public class JsonUtils {
         actualSteps.setVideoURL(jsonObject.optString("videoURL", ""));
         return actualSteps;
     }
+
+
 }

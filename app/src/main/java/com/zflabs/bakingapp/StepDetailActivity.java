@@ -4,10 +4,17 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import com.zflabs.bakingapp.data.Steps;
+import com.zflabs.bakingapp.utils.JsonUtils;
 
 public class StepDetailActivity extends AppCompatActivity {
 
+    private Steps[] steps;
 
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +25,25 @@ public class StepDetailActivity extends AppCompatActivity {
         if (intentThatStartedThisActivity != null && intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
             String stepString = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
             StepDetailFragment stepDetailFragment = new StepDetailFragment();
+            this.steps = JsonUtils.getStepsFromString(stepString);
             Bundle bundle = new Bundle();
-            bundle.putString("step", stepString);
+            bundle.putString("step", this.steps[0].toJSON().toString());
+            bundle.putBoolean("last", this.steps.length==1);
             stepDetailFragment.setArguments(bundle);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().add(R.id.step_detail_fragment, stepDetailFragment).commit();
         }
     }
+
+    public void nextStep(View button) {
+        position++;
+        StepDetailFragment stepDetailFragment = new StepDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("step", this.steps[position].toJSON().toString());
+        bundle.putBoolean("last", this.steps.length-position==1);
+        stepDetailFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.step_detail_fragment, stepDetailFragment).commit();
+    }
+
 }

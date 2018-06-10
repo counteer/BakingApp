@@ -5,6 +5,16 @@
     android:layout_height="fill_parent">
 
     <FrameLayout
+        android:id="@+id/steps_fragment"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:id="@+id/divider"
+        android:background="@android:color/darker_gray" />
+    <FrameLayout
         android:id="@+id/step_detail_fragment"
         android:layout_weight="1"
         android:layout_width="0dp"

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zflabs.bakingapp.data.Steps;
 
@@ -24,7 +23,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     }
 
     public interface StepAdapterClickHandler{
-        void onClick(Steps steps);
+        void onClick(int adapterPosition);
     }
 
     public class StepHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -40,8 +39,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         @Override
         public void onClick(View v) {
             int adapterPosition = getAdapterPosition();
-            Steps actualStep = steps[adapterPosition];
-            clickHandler.onClick(actualStep);
+            clickHandler.onClick(adapterPosition);
         }
     }
     @Override

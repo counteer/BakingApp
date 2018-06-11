@@ -47,7 +47,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws Exception {
         onView(withText("Nutella Pie")).perform(click());
         intended(allOf(
-//                hasAction(Intent.ACTION_PICK),
                 hasExtraWithKey(Intent.EXTRA_TEXT),
                 hasComponent(RecipeHowtoActivity.class.getName()),
                 toPackage("com.zflabs.bakingapp")

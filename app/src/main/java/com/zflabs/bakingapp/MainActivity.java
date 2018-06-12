@@ -39,14 +39,12 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-
     @Override
     public void onClick(Recipe recipe) {
         Context context = this;
         Class destinationClass = RecipeHowtoActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
         intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, recipe.toJSON());
-        Log.i("MainActivity", ""+ recipe.getId());
         IngredientsService.startActionDoSomething(this, recipe.getId());
         startActivity(intentToStartDetailActivity);
     }

@@ -51,7 +51,6 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //  this.clickListener = (OnStepClickListener) context;
     }
 
     @Override
@@ -64,7 +63,7 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.steps_view, container, false);
         TextView ingredients = (TextView) rootView.findViewById(R.id.tv_ingredients);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_steps);

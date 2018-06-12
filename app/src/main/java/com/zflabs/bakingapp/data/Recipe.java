@@ -14,6 +14,7 @@ public class Recipe {
     }
 
     private String name;
+
     private int id;
 
     private int servings;
@@ -86,5 +87,4 @@ public class Recipe {
         }
         return rsult;
     }
-
 }

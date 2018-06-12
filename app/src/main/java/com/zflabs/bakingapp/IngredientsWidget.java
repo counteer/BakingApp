@@ -23,8 +23,6 @@ import java.net.URL;
  */
 public class IngredientsWidget extends AppWidgetProvider {
 
-    private static Integer loaderId = 2213;
-
     static void updateAppWidgets(Context context, AppWidgetManager appWidgetManager,
                                  int recipeId, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
@@ -39,7 +37,7 @@ public class IngredientsWidget extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         views.setOnClickPendingIntent(R.id.widget_ingredient_list, pendingIntent);
         Log.i("IngredientsService", recipeId + "");
-        new DownloadFilesTask(context, appWidgetId, appWidgetManager).execute(recipeId);
+        new DownloadIngredients(context, appWidgetId, appWidgetManager).execute(recipeId);
     }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
@@ -50,7 +48,6 @@ public class IngredientsWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -66,12 +63,12 @@ public class IngredientsWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    static class DownloadFilesTask extends AsyncTask<Integer, Void, Recipe> {
+    static class DownloadIngredients extends AsyncTask<Integer, Void, Recipe> {
         private final Context context;
         private final AppWidgetManager appWidgetManager;
         private final int appWidgetId;
 
-        DownloadFilesTask(Context context, int appWidgetId, AppWidgetManager appWidgetManager) {
+        DownloadIngredients(Context context, int appWidgetId, AppWidgetManager appWidgetManager) {
             this.context = context;
             this.appWidgetId = appWidgetId;
             this.appWidgetManager = appWidgetManager;

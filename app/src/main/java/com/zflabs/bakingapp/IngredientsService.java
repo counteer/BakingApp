@@ -45,7 +45,6 @@ public class IngredientsService extends IntentService {
 
     private void handleDoSomething(int recipeId) {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
-
         int[] appWidgetIds = manager.getAppWidgetIds(new ComponentName(this, IngredientsWidget.class));
         IngredientsWidget.updateAppWidgets(this, manager, recipeId, appWidgetIds);
     }

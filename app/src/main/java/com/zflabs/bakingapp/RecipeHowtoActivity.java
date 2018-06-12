@@ -35,7 +35,6 @@ public class RecipeHowtoActivity extends AppCompatActivity {
                 Bundle bundle2 = new Bundle();
                 bundle2.putString("step", recipe.getSteps()[0].toJSON().toString());
                 StepDetailFragment stepDetailFragment = new StepDetailFragment();
-
                 stepDetailFragment.setArguments(bundle2);
                 fragmentManager.beginTransaction().add(R.id.step_detail_fragment, stepDetailFragment).commit();
             }

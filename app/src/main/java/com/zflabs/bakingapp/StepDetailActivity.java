@@ -23,7 +23,6 @@ public class StepDetailActivity extends AppCompatActivity {
         Intent intentThatStartedThisActivity = getIntent();
         Log.i("StepDetailActivity", "onCreate");
         if (savedInstanceState == null) {
-
             if (intentThatStartedThisActivity != null && intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
                 String stepString = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
                 StepDetailFragment stepDetailFragment = new StepDetailFragment();

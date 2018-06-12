@@ -14,7 +14,6 @@ import org.json.JSONObject;
 public class JsonUtils {
 
     public static Recipe[] getRecipesFromJsonString(String recipesString) throws JSONException {
-
         JSONArray recipeArray = new JSONArray(recipesString);
         Recipe[] recipes = new Recipe[recipeArray.length()];
         for (int i = 0; i < recipeArray.length(); i++) {

@@ -23,7 +23,6 @@ public class RecipeLoaderCallback implements LoaderManager.LoaderCallbacks<Recip
         this.recipes = rv;
     }
 
-    @SuppressLint("StaticFieldLeak")
     @Override
     public Loader<Recipe[]> onCreateLoader(int i, Bundle bundle) {
         return new RecipeAsyncTask(context);

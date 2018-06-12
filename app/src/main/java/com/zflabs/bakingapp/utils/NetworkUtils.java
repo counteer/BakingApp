@@ -19,14 +19,9 @@ public final class NetworkUtils {
             "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     public static URL buildUrl() {
-        Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-
-                .build();
-
+        Uri builtUri = Uri.parse(BASE_URL).buildUpon().build();
         URL url = convertUriToURL(builtUri);
-
         Log.v(TAG, "Built URI " + url);
-
         return url;
     }
 
@@ -46,9 +41,7 @@ public final class NetworkUtils {
         urlConnection.setConnectTimeout(5000);
         try (InputStream in = urlConnection.getInputStream();
              Scanner scanner = new Scanner(in);) {
-
             scanner.useDelimiter("\\A");
-
             boolean hasInput = scanner.hasNext();
             if (hasInput) {
                 return scanner.next();

@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Recipe[]> callback = new RecipeLoaderCallback(this, recipeAdapter, recipes);
         Bundle bundleForLoader = null;
         getSupportLoaderManager().initLoader(loaderId, bundleForLoader, callback);
-
     }
 
     @Override

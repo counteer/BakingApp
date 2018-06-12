@@ -40,7 +40,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
             view.setOnClickListener(this);
         }
 
-
         @Override
         public void onClick(View view) {
             int adapterPosition = getAdapterPosition();

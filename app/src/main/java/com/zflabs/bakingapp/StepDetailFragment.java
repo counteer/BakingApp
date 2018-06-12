@@ -102,11 +102,10 @@ public class StepDetailFragment extends Fragment {
 
         // Measures bandwidth during playback. Can be null if not required.
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(getContext(),
-                Util.getUserAgent(getContext(), "yourApplicationName"));
+                Util.getUserAgent(getContext(), "bakingApp"));
         MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(Uri.parse(steps.getVideoURL()));
         player.prepare(videoSource);
-//        player.getCurrentPosition();
         if (position != null) player.seekTo(position);
         return rootView;
     }

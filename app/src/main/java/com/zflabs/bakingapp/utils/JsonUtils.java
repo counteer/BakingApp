@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class JsonUtils {
 
-    public static Recipe[] getRecipesFromJsonString(String recipesString) throws JSONException{
+    public static Recipe[] getRecipesFromJsonString(String recipesString) throws JSONException {
 
         JSONArray recipeArray = new JSONArray(recipesString);
         Recipe[] recipes = new Recipe[recipeArray.length()];
@@ -25,14 +25,15 @@ public class JsonUtils {
         return recipes;
     }
 
-    public static Recipe getRecipeFromJsonString(String recipe)  {
+    public static Recipe getRecipeFromJsonString(String recipe) {
         try {
             JSONObject result = new JSONObject(recipe);
             return getRecipeFromString(result);
-        } catch (JSONException jsone){
+        } catch (JSONException jsone) {
             return new Recipe();
         }
     }
+
     @NonNull
     private static Recipe getRecipeFromString(JSONObject actualRecipeJson) throws JSONException {
         Recipe actualRecipe = new Recipe();
@@ -46,30 +47,30 @@ public class JsonUtils {
         return actualRecipe;
     }
 
-    public static Steps getStep(String stepsString){
+    public static Steps getStep(String stepsString) {
         Steps steps = new Steps();
         try {
             JSONObject stepJson = new JSONObject(stepsString);
-            steps= getStep(stepJson);
+            steps = getStep(stepJson);
         } catch (JSONException e) {
             Log.e("JsonUtils", e.getMessage());
         }
         return steps;
     }
 
-    public static JSONArray getJsonFromSteps(Steps[] steps){
-        JSONArray result =  new JSONArray();
-        for(Steps step : steps){
+    public static JSONArray getJsonFromSteps(Steps[] steps) {
+        JSONArray result = new JSONArray();
+        for (Steps step : steps) {
             JSONObject jsonObject = step.toJSON();
             result.put(jsonObject);
         }
         return result;
     }
 
-    public static Steps[] getStepsFromString(String steps){
+    public static Steps[] getStepsFromString(String steps) {
         try {
             JSONArray input = new JSONArray(steps);
-            JSONObject a  = new JSONObject();
+            JSONObject a = new JSONObject();
             a.put("steps", input);
             Steps[] result = getSteps(a);
             return result;
@@ -82,7 +83,7 @@ public class JsonUtils {
     private static Steps[] getSteps(JSONObject actualRecipeJson) throws JSONException {
         JSONArray steps = actualRecipeJson.getJSONArray("steps");
         Steps[] result = new Steps[steps.length()];
-        for(int i = 0; i < steps.length();++i){
+        for (int i = 0; i < steps.length(); ++i) {
             JSONObject jsonObject = steps.getJSONObject(i);
             Steps actualSteps = getStep(jsonObject);
             result[i] = actualSteps;
@@ -93,7 +94,7 @@ public class JsonUtils {
     private static Ingredients[] getIngredients(JSONObject actualRecipeJson) throws JSONException {
         JSONArray ingredients = actualRecipeJson.getJSONArray("ingredients");
         Ingredients[] result = new Ingredients[ingredients.length()];
-        for(int i = 0; i < ingredients.length();++i){
+        for (int i = 0; i < ingredients.length(); ++i) {
             JSONObject jsonObject = ingredients.getJSONObject(i);
             Ingredients actualIingredients = new Ingredients();
             actualIingredients.setIngredient(jsonObject.optString("ingredient", ""));

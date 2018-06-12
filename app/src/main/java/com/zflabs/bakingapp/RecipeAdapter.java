@@ -12,13 +12,13 @@ import com.zflabs.bakingapp.data.Recipe;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdapterViewHolder>{
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdapterViewHolder> {
 
     private Recipe[] recipes = new Recipe[0];
 
     private RecipeAdapterClickHandler clickHandler;
 
-    RecipeAdapter(RecipeAdapterClickHandler clickHandler){
+    RecipeAdapter(RecipeAdapterClickHandler clickHandler) {
         this.clickHandler = clickHandler;
     }
 
@@ -26,7 +26,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         void onClick(Recipe recipe);
     }
 
-    public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tv_recipe_name)
         TextView recipeName;
@@ -73,7 +73,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         return recipes.length;
     }
 
-    public void setRecipes(Recipe[] recipes){
+    public void setRecipes(Recipe[] recipes) {
         this.recipes = recipes;
     }
 }

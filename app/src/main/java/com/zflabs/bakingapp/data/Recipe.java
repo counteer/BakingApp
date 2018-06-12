@@ -55,20 +55,20 @@ public class Recipe {
         this.steps = steps;
     }
 
-    public String   toJSON() {
+    public String toJSON() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("id", id);
             jsonObject.put("name", name);
             jsonObject.put("servings", servings);
             JSONArray stepsJson = new JSONArray();
-            for(int i = 0; i < steps.length; ++i){
+            for (int i = 0; i < steps.length; ++i) {
                 JSONObject actualStep = steps[i].toJSON();
                 stepsJson.put(i, actualStep);
             }
             jsonObject.put("steps", stepsJson);
             JSONArray ingredientsJson = new JSONArray();
-            for(int i = 0; i < ingredients.length; ++i){
+            for (int i = 0; i < ingredients.length; ++i) {
                 JSONObject actualIngredient = ingredients[i].toJSON();
                 ingredientsJson.put(i, actualIngredient);
             }
@@ -79,10 +79,10 @@ public class Recipe {
         }
     }
 
-    public String getIngredintsString(){
-        String rsult ="";
-        for(Ingredients ing: ingredients){
-            rsult+=ing.toString() + "\n";
+    public String getIngredintsString() {
+        String rsult = "";
+        for (Ingredients ing : ingredients) {
+            rsult += ing.toString() + "\n";
         }
         return rsult;
     }

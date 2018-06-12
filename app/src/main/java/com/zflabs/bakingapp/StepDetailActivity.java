@@ -1,12 +1,11 @@
 package com.zflabs.bakingapp;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.zflabs.bakingapp.data.Steps;
 import com.zflabs.bakingapp.utils.JsonUtils;
@@ -23,7 +22,7 @@ public class StepDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_step_detail);
         Intent intentThatStartedThisActivity = getIntent();
         Log.i("StepDetailActivity", "onCreate");
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
 
             if (intentThatStartedThisActivity != null && intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)) {
                 String stepString = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
@@ -49,7 +48,7 @@ public class StepDetailActivity extends AppCompatActivity {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putString("step", this.steps[position].toJSON().toString());
-        bundle.putBoolean("last", this.steps.length-position==1);
+        bundle.putBoolean("last", this.steps.length - position == 1);
         stepDetailFragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.step_detail_fragment, stepDetailFragment).commit();

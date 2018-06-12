@@ -7,7 +7,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.zflabs.bakingapp.data.Recipe;
 
@@ -15,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements
-        RecipeAdapter.RecipeAdapterClickHandler{
+        RecipeAdapter.RecipeAdapterClickHandler {
 
     private static final int RECIPE_LOADER_ID = 213;
 

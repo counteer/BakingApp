@@ -35,6 +35,7 @@ public class RecipeAsyncTask extends AsyncTaskLoader<Recipe[]> {
         }
         return result;
     }
+
     @Override
     protected void onStartLoading() {
         if (recipes != null) {

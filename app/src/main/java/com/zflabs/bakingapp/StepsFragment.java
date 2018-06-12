@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zflabs.bakingapp.data.Ingredients;
 import com.zflabs.bakingapp.data.Recipe;
 import com.zflabs.bakingapp.data.Steps;
 import com.zflabs.bakingapp.utils.JsonUtils;
@@ -20,15 +19,14 @@ import com.zflabs.bakingapp.utils.JsonUtils;
 import java.util.Arrays;
 
 
-public class StepsFragment extends Fragment implements StepAdapter.StepAdapterClickHandler{
+public class StepsFragment extends Fragment implements StepAdapter.StepAdapterClickHandler {
 
-    private OnStepClickListener clickListener;
     private Recipe recipe;
 
     @Override
     public void onClick(int adapterPosition) {
         Steps[] steps = this.recipe.getSteps();
-        if(RecipeHowtoActivity.twoPane){
+        if (RecipeHowtoActivity.twoPane) {
             Bundle bundle2 = new Bundle();
             bundle2.putString("step", steps[adapterPosition].toJSON().toString());
             StepDetailFragment stepDetailFragment = new StepDetailFragment();
@@ -46,18 +44,14 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
         }
     }
 
-    public interface OnStepClickListener {
-        void onStepSelected(int position);
-    }
-
-    public StepsFragment(){
+    public StepsFragment() {
 
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  this.clickListener = (OnStepClickListener) context;
+        //  this.clickListener = (OnStepClickListener) context;
     }
 
     @Override
@@ -72,7 +66,7 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.steps_view, container, false);
-        TextView ingredients  = (TextView) rootView.findViewById(R.id.tv_ingredients);
+        TextView ingredients = (TextView) rootView.findViewById(R.id.tv_ingredients);
         RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_steps);
         ingredients.setText(this.recipe.getIngredintsString());
         StepAdapter adapter = new StepAdapter(this);

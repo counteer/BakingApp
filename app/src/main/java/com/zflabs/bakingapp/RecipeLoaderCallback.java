@@ -4,19 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.zflabs.bakingapp.data.Recipe;
-import com.zflabs.bakingapp.utils.JsonUtils;
-import com.zflabs.bakingapp.utils.NetworkUtils;
-
-import org.json.JSONException;
-
-import java.io.IOException;
-import java.net.URL;
 
 public class RecipeLoaderCallback implements LoaderManager.LoaderCallbacks<Recipe[]> {
 
@@ -25,7 +16,8 @@ public class RecipeLoaderCallback implements LoaderManager.LoaderCallbacks<Recip
     RecyclerView recipes;
 
     private RecipeAdapter recipeAdapter;
-    public RecipeLoaderCallback(Context context, RecipeAdapter recipeAdapter, RecyclerView rv){
+
+    public RecipeLoaderCallback(Context context, RecipeAdapter recipeAdapter, RecyclerView rv) {
         this.context = context;
         this.recipeAdapter = recipeAdapter;
         this.recipes = rv;

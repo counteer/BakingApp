@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.zflabs.bakingapp.data.Ingredients;
-
 public class IngredientsService extends IntentService {
 
-    public static final String DO_SOMETHING =
-            "com.zflabs.bakingapp.do_something";
+    public static final String DO_SOMETHING = "com.zflabs.bakingapp.do_something";
 
     public IngredientsService() {
         super("IngredientsService");
@@ -29,7 +26,7 @@ public class IngredientsService extends IntentService {
         intent.setAction(DO_SOMETHING);
         Bundle extras = new Bundle();
         extras.putInt("recipe", recipeId);
-        Log.i("IngredientsSErvice", recipeId+"");
+        Log.i("IngredientsSErvice", recipeId + "");
         intent.putExtras(extras);
         context.startService(intent);
     }

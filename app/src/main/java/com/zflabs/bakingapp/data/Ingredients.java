@@ -47,7 +47,7 @@ public class Ingredients {
         }
     }
 
-    public String toString(){
+    public String toString() {
         return quantity + " " + measure + " " + ingredient;
     }
 }

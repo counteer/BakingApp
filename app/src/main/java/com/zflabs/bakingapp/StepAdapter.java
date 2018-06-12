@@ -22,7 +22,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         this.clickHandler = clickHandler;
     }
 
-    public interface StepAdapterClickHandler{
+    public interface StepAdapterClickHandler {
         void onClick(int adapterPosition);
     }
 
@@ -42,6 +42,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
             clickHandler.onClick(adapterPosition);
         }
     }
+
     @Override
     public StepHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
@@ -60,10 +61,10 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     @Override
     public int getItemCount() {
-        return steps==null?0:steps.length;
+        return steps == null ? 0 : steps.length;
     }
 
-    public void setSteps(Steps[] steps){
+    public void setSteps(Steps[] steps) {
         this.steps = steps;
     }
 

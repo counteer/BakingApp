@@ -4,15 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -28,7 +24,6 @@ import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.zflabs.bakingapp.data.Recipe;
 import com.zflabs.bakingapp.data.Steps;
 import com.zflabs.bakingapp.utils.JsonUtils;
 
@@ -54,14 +49,14 @@ public class StepDetailFragment extends Fragment {
 
     private boolean lastStep;
 
-    public StepDetailFragment(){
+    public StepDetailFragment() {
 
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(player!=null) {
+        if (player != null) {
             outState.putLong("position", player.getCurrentPosition());
         } else {
             outState.putLong("position", 0L);
@@ -88,12 +83,12 @@ public class StepDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.step_detail_view, container, false);
         ButterKnife.bind(this, rootView);
         description.setText(steps.getDescription());
-        if(RecipeHowtoActivity.twoPane || lastStep){
+        if (RecipeHowtoActivity.twoPane || lastStep) {
             nextButton.setVisibility(View.GONE);
         }
 
         if (savedInstanceState != null) {
-            position = savedInstanceState.getLong("position",0L);
+            position = savedInstanceState.getLong("position", 0L);
         }
 
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -107,12 +102,12 @@ public class StepDetailFragment extends Fragment {
 
         // Measures bandwidth during playback. Can be null if not required.
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(getContext(),
-            Util.getUserAgent(getContext(), "yourApplicationName"));
+                Util.getUserAgent(getContext(), "yourApplicationName"));
         MediaSource videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(Uri.parse(steps.getVideoURL()));
         player.prepare(videoSource);
 //        player.getCurrentPosition();
-        if(position!=null) player.seekTo(position);
+        if (position != null) player.seekTo(position);
         return rootView;
     }
 }

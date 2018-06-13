@@ -49,6 +49,8 @@ public class StepDetailFragment extends Fragment {
 
     private boolean lastStep;
 
+    private boolean playing;
+
     public StepDetailFragment() {
 
     }
@@ -58,6 +60,7 @@ public class StepDetailFragment extends Fragment {
         super.onSaveInstanceState(outState);
         if (player != null) {
             outState.putLong("position", player.getCurrentPosition());
+            outState.putBoolean("playing", player.getPlayWhenReady());
         } else {
             outState.putLong("position", 0L);
         }
@@ -82,6 +85,7 @@ public class StepDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.step_detail_view, container, false);
         ButterKnife.bind(this, rootView);
+
         description.setText(steps.getDescription());
         if (RecipeHowtoActivity.twoPane || lastStep) {
             nextButton.setVisibility(View.GONE);
@@ -89,6 +93,7 @@ public class StepDetailFragment extends Fragment {
 
         if (savedInstanceState != null) {
             position = savedInstanceState.getLong("position", 0L);
+            playing = savedInstanceState.getBoolean("playing", false);
         }
 
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -107,6 +112,27 @@ public class StepDetailFragment extends Fragment {
                 .createMediaSource(Uri.parse(steps.getVideoURL()));
         player.prepare(videoSource);
         if (position != null) player.seekTo(position);
+        if (playing) player.setPlayWhenReady(playing);
         return rootView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        releasePlayer();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        releasePlayer();
+    }
+
+    private void releasePlayer(){
+        if (player != null) {
+            player.stop();
+            player.release();
+            player = null;
+        }
     }
 }

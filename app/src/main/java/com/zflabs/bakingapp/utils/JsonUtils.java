@@ -43,6 +43,7 @@ public class JsonUtils {
         actualRecipe.setSteps(steps);
         Ingredients[] ingredients = getIngredients(actualRecipeJson);
         actualRecipe.setIngredients(ingredients);
+        actualRecipe.setImage(actualRecipeJson.getString("image"));
         return actualRecipe;
     }
 

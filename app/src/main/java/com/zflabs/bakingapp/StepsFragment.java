@@ -38,6 +38,7 @@ public class StepsFragment extends Fragment implements StepAdapter.StepAdapterCl
             Bundle bundle = new Bundle();
             Steps[] stepsToSend = Arrays.copyOfRange(steps, adapterPosition, steps.length);
             bundle.putString(Intent.EXTRA_TEXT, JsonUtils.getJsonFromSteps(stepsToSend).toString());
+            bundle.putString("parentData", recipe.toJSON());
             Intent intent = new Intent(getContext(), StepDetailActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

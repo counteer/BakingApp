@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.zflabs.bakingapp.data.Steps;
 
 import butterknife.BindView;
@@ -29,6 +31,10 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     public class StepHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.step_description)
         TextView textView;
+
+        @BindView(R.id.step_image)
+        ImageView stepImage;
+
 
         public StepHolder(View view) {
             super(view);
@@ -56,7 +62,15 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     @Override
     public void onBindViewHolder(StepHolder holder, int position) {
-        holder.textView.setText(steps[position].getShortDescription());
+        Context context = holder.stepImage.getContext();
+        Steps step = steps[position];
+        holder.textView.setText(step.getShortDescription());
+        String image = step.getThumbNailURL();
+        if(image==null||"".equals(image)){
+            Picasso.with(context).load(R.drawable.noimage).into(holder.stepImage);
+        } else {
+            Picasso.with(context).load(image).into(holder.stepImage);
+        }
     }
 
     @Override

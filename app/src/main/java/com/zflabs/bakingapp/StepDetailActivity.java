@@ -3,8 +3,11 @@ package com.zflabs.bakingapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.zflabs.bakingapp.data.Steps;
@@ -20,6 +23,8 @@ public class StepDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_detail);
+        ActionBar supportActionBar = getSupportActionBar();
+        supportActionBar.setDisplayHomeAsUpEnabled(true);
         Intent intentThatStartedThisActivity = getIntent();
         Log.i("StepDetailActivity", "onCreate");
         if (savedInstanceState == null) {
@@ -53,4 +58,19 @@ public class StepDetailActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.step_detail_fragment, stepDetailFragment).commit();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+//                NavUtils.navigateUpFromSameTask(this);
+                navigateBack();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void navigateBack(){
+        this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
+        this.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK));
+    }
 }

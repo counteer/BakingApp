@@ -2,8 +2,10 @@ package com.zflabs.bakingapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.zflabs.bakingapp.data.Recipe;
 import com.zflabs.bakingapp.utils.JsonUtils;
@@ -36,10 +38,13 @@ public class RecipeHowtoActivity extends AppCompatActivity {
                 bundle2.putString("step", recipe.getSteps()[0].toJSON().toString());
                 StepDetailFragment stepDetailFragment = new StepDetailFragment();
                 stepDetailFragment.setArguments(bundle2);
-                fragmentManager.beginTransaction().add(R.id.step_detail_fragment, stepDetailFragment).commit();
+                if(savedInstanceState==null)
+                    fragmentManager.beginTransaction().add(R.id.step_detail_fragment, stepDetailFragment).commit();
+                else {
+                    fragmentManager.beginTransaction().replace( R.id.step_detail_fragment, stepDetailFragment).commit();
+                }
             }
         }
     }
-
 
 }

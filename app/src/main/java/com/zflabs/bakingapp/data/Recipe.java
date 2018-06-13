@@ -5,6 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Recipe {
+    private String image;
+
     public Ingredients[] getIngredients() {
         return ingredients;
     }
@@ -74,6 +76,7 @@ public class Recipe {
                 ingredientsJson.put(i, actualIngredient);
             }
             jsonObject.put("ingredients", ingredientsJson);
+            jsonObject.put("image", image);
             return jsonObject.toString();
         } catch (JSONException e) {
             return "";
@@ -86,5 +89,13 @@ public class Recipe {
             rsult += ing.toString() + "\n";
         }
         return rsult;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 }

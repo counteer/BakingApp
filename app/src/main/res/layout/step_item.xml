@@ -3,15 +3,22 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/back">
+    <ImageView
+        android:id="@+id/step_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="5dp"/>
     <TextView
         android:id="@+id/step_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:textSize="20sp"
-        android:background="@drawable/back"
-        />
+
+    />
 
 
 </LinearLayout>
